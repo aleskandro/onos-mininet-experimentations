@@ -1,0 +1,9 @@
+cp onos-1.6.0.root.tar.gz /tmp
+cell tutorial
+onos-install -f '10.32.32.171'
+./Applications/apache-karaf-3.0.5/bin/client -u karaf -h 10.32.32.171
+mn -c
+mn --custom ./gre.py --topo mytopo --switch ovsk --controller=remote,ip=10.32.32.171
+ovs-vsctl add-port sb1 sb1-gre1 -- set interface sb1-gre1 type=gre options:remote_ip=10.32.32.170
+
+

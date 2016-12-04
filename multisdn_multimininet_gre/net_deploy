@@ -1,0 +1,7 @@
+cp /root/onos-1.6.0.root.tar.gz /tmp
+cell tutorial
+onos-install -f '10.32.32.170'
+echo "Enable forwarding app and press ctrl+d"
+./Applications/apache-karaf-3.0.5/bin/client -u karaf -h 10.32.32.170
+mn --custom ./gre.py --topo mytopo --switch ovsk --controller=remote,ip=10.32.32.170
+

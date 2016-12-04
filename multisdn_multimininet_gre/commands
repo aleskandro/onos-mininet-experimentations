@@ -1,0 +1,26 @@
+#build & start onos
+mn -c
+cell tutorial
+onos-build
+onos-package
+onos-install -f '192.168.0.2'
+
+
+#mininet
+ mn --custom /root/onos/tools/test/topos/tower.py --topo tower --controller remote,192.168.0.2 --mac
+#karaf client
+./Applications/apache-karaf-3.0.5/bin/client -u karaf -h 192.168.0.2
+
+#curl
+
+curl -u onos:rocks -H "Content-Type: application/json" -X POST -d "$JSON_POST"  http://192.168.0.2:8181/onos/v1/flows/of:000000000000000d -v
+
+
+#installing apps
+#
+mvn clean install 
+onos-app localhost reinstall! org.foo.app target/foo-app-1.0-SNAPSHOT.oar
+
+
+#creating app
+#mvn archetype:generate -DarchetypeGroupId=org.onosproject -DarchetypeArtifactId=onos-bundle-archetype
